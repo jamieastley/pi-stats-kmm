@@ -1,0 +1,52 @@
+name: CI
+
+on: [push]
+
+jobs:
+  build-macos:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v1
+      - name: Setup Java JDK
+        uses: actions/setup-java@v2.1.0
+        with:
+          distribution: 'adopt'
+          java-version: '16'
+      - name: Build the project
+        run: ./gradlew packageDmg
+
+  build-linux:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - name: Setup Java JDK
+        uses: actions/setup-java@v2.1.0
+        with:
+          distribution: 'adopt'
+          java-version: '16'
+      - name: Build the project
+        run: ./gradlew packageDeb
+
+  build-windows:
+    runs-on: windows-2022
+    steps:
+      - uses: actions/checkout@v1
+      - name: Setup Java JDK
+        uses: actions/setup-java@v2.1.0
+        with:
+          distribution: 'adopt'
+          java-version: '16'
+      - name: Build the project
+        run: ./gradlew packageMsi
+
+  build-android:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - name: Setup Java JDK
+        uses: actions/setup-java@v2.1.0
+        with:
+          distribution: 'adopt'
+          java-version: '16'
+      - name: Build the project
+        run: ./gradlew assembleDebug
